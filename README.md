@@ -1,27 +1,42 @@
-# swarmex-nano-mesh
+# Swarmex Nano Mesh
 
-Lightweight WireGuard service mesh for Docker Swarm via EasyTier.
+Service mesh peer registration via EasyTier (WireGuard) for Docker Swarm.
 
-## What it does
+Part of [Swarmex](https://github.com/ccvass/swarmex) — enterprise-grade orchestration for Docker Swarm.
 
-Listens to Docker events, auto-registers/deregisters EasyTier mesh peers when services with mesh labels start or stop. Provides encrypted service-to-service communication without manual WireGuard configuration.
+## What It Does
 
-## Why it matters
+Automatically registers mesh-enabled services as EasyTier peers, creating a WireGuard-based service mesh. Services in the same mesh network get encrypted peer-to-peer connectivity without manual configuration.
 
-Kubernetes has Istio and Linkerd for service mesh with mTLS. Docker Swarm has encrypted overlay networks but no service mesh with automatic peer management. This controller wraps EasyTier (10.8K stars, WireGuard-based) to provide automatic mesh networking.
-
-## Verified
-
-- ✅ Detected service with mesh labels
-- ✅ Attempted peer registration with EasyTier
-- ✅ EasyTier binary included in Docker image
-
-## Configuration
+## Labels
 
 ```yaml
 deploy:
   labels:
-    swarmex.mesh.enabled: "true"
-    swarmex.mesh.network: "my-mesh"
-    swarmex.mesh.secret: "mesh-secret"
+    swarmex.mesh.enabled: "true"         # Enable mesh registration
+    swarmex.mesh.network: "production"   # Mesh network name
 ```
+
+## How It Works
+
+1. Watches for services with mesh labels via Docker events.
+2. Resolves the service's container IPs and endpoints.
+3. Registers each instance as an EasyTier peer in the configured network.
+4. Deregisters peers when services are removed or scaled down.
+
+## Quick Start
+
+```bash
+docker service update \
+  --label-add swarmex.mesh.enabled=true \
+  --label-add swarmex.mesh.network=production \
+  my-app
+```
+
+## Verified
+
+Peers registered successfully for all mesh-enabled services in the target network.
+
+## License
+
+Apache-2.0
