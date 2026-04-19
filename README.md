@@ -1,5 +1,10 @@
 <p align="center"><img src="https://raw.githubusercontent.com/ccvass/swarmex/main/docs/assets/logo.svg" alt="Swarmex" width="400"></p>
 
+<p align="center">
+  <a href="https://github.com/ccvass/swarmex-nano-mesh/actions"><img src="https://github.com/ccvass/swarmex-nano-mesh/actions/workflows/publish.yml/badge.svg" alt="Test, Build &amp; Deploy"></a>
+  <a href="https://github.com/ccvass/swarmex-nano-mesh/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ccvass/swarmex-nano-mesh" alt="License"></a>
+</p>
+
 # Swarmex Nano Mesh
 
 Service mesh peer registration via EasyTier (WireGuard) for Docker Swarm.
