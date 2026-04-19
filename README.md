@@ -1,3 +1,5 @@
+<p align="center"><img src="https://raw.githubusercontent.com/ccvass/swarmex/main/docs/assets/logo.svg" alt="Swarmex" width="400"></p>
+
 # Swarmex Nano Mesh
 
 Service mesh peer registration via EasyTier (WireGuard) for Docker Swarm.
