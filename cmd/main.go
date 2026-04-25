@@ -9,6 +9,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/docker/docker/api/types/events"
 	"github.com/docker/docker/client"
@@ -47,6 +48,8 @@ func main() {
 	defer cancel()
 
 	logger.Info("swarmex-nano-mesh starting", "easytier", easytierBin, "peer", peerEndpoint)
+
+	go mesh.OverlayMonitor(ctx, 30*time.Second)
 
 	msgCh, errCh := cli.Events(ctx, events.ListOptions{})
 	for {
